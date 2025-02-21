@@ -13,4 +13,5 @@
 - `source env/bin/activate` - войти в виртуальное окружение на linux/macOS
 - `env/Scripts/Activate.ps1` - войти в виртуальное окружение на Windows
 - `pip install -r requirements.txt` - установка зависимостей
+- `python manage.py migrate` - применение миграций 
 - `python manage.py runserver` - запустить сервер для разработки на http://127.0.0.1:8000
