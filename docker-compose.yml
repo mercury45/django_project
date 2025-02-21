@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: cakesite
+      POSTGRES_USER: cakesite
+      POSTGRES_PASSWORD: cake1
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+
+volumes:
+  db:
+
