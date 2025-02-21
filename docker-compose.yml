@@ -4,9 +4,9 @@ services:
     ports:
       - "5434:5432"
     environment:
-      POSTGRES_DB: cakesite
-      POSTGRES_USER: cakesite
-      POSTGRES_PASSWORD: cake1
+      POSTGRES_DB: cakestore
+      POSTGRES_USER: cakestore
+      POSTGRES_PASSWORD: cakestore
     volumes:
       - "db:/var/lib/postgresql/data"
 
