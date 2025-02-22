@@ -1,0 +1,10 @@
+{% extends "web/base.html" %}
+{% block content %}
+    {% if not user.is_anonymous %}
+    Вы авторизованы как <b>{{user.username}}</b>
+    {% endif %}
+    <h2>Hello, bro</h2>
+    {{ year }}
+    </form>
+{% endblock %}
+
