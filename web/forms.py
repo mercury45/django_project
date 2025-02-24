@@ -1,6 +1,6 @@
 from django import forms
 
-from web.models import User
+from web.models import User, Order
 
 
 class RegistrationForm(forms.ModelForm):
@@ -20,3 +20,18 @@ class RegistrationForm(forms.ModelForm):
 class AuthForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+class OrderForm(forms.ModelForm):
+    def save(self, commit=True):
+        self.instance.user = self.initial['user']
+        return super().save(commit)
+
+    class Meta:
+        model = Order
+        fields = ('order_date', "image")
+        widgets = {
+            "order_date": forms.DateTimeInput(
+                attrs={'type': 'datetime-local'},
+                format='%Y-%m-%dT%H:%M')
+        }

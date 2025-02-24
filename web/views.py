@@ -3,16 +3,17 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.datetime_safe import datetime
 
-from web.forms import RegistrationForm, AuthForm
+from web.forms import RegistrationForm, AuthForm, OrderForm
+from web.models import Order
 
 User = get_user_model()
 
 
 # Create your views here.
 def main_view(request):
-    year = datetime.now().year
+    orders = Order.objects.all()
     return render(request, 'web/main.html', {
-        "year" : year
+        "orders": orders
     })
 
 def registration_view(request):
@@ -52,3 +53,18 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("main")
+
+
+def order_edit_view(request, id=None):
+    order = None
+    if id is not None:
+        order = Order.objects.get(id=id)
+    form = OrderForm(instance=order)
+    if request.method == 'POST':
+        form = OrderForm(data=request.POST, files=request.FILES, instance=order,initial={"user": request.user})
+        if form.is_valid():
+            form.save()
+            return redirect("main")
+    return render(request, 'web/order_add_form.html', {
+        "form": form
+    })

@@ -4,7 +4,18 @@
     Вы авторизованы как <b>{{user.username}}</b>
     {% endif %}
     <h2>Hello, bro</h2>
-    {{ year }}
-    </form>
+    <a href="{% url 'orders_add' %}">Заказать торт</a>
+    <ul>
+        {% for order in orders %}
+            <li>
+                <b>Status: {{ order.status }}</b>
+            </li>
+            <li>
+                <b>Order for: {{ order.order_date }}</b>
+            </li>
+            <a href="{% url 'orders_edit' order.id %}">Edit</a>
+            <hr>
+        {% endfor %}
+    </ul>
 {% endblock %}
 

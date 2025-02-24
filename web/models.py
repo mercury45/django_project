@@ -12,10 +12,10 @@ class Product(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    order_date = models.DateTimeField()
+    order_date = models.DateTimeField(verbose_name="Дата совершения заказа")
     created_at = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=10)
-
+    status = models.CharField(max_length=10, default='Created')
+    image = models.ImageField(upload_to='orders/', null=True, blank=True)
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
