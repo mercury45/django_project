@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.datetime_safe import datetime
@@ -35,7 +35,7 @@ def registration_view(request):
     })
 
 
-def auth_view(request):
+def login_view(request):
     form = AuthForm()
     if request.method == 'POST':
         form = AuthForm(data=request.POST)
@@ -48,3 +48,7 @@ def auth_view(request):
                 return redirect("main")
     return render(request, 'web/auth.html', {"form":form})
 
+
+def logout_view(request):
+    logout(request)
+    return redirect("main")
